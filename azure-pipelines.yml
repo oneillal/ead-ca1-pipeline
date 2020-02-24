@@ -37,7 +37,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - script: sed -i 's/azure-vote-front:latest/azure-vote-front:$(tag)/g' azure-vote-all-in-one-redis.yaml
+    - script: sed -i 's/azurevote:latest/azurevote:$(tag)/g' azure-vote-all-in-one-redis.yaml
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)'
