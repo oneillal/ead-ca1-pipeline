@@ -20,7 +20,7 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Provision AKS
+- stage: Provision_AKS
   displayName: Provision an aks cluster
   jobs:  
   - job: AKS
