@@ -1,0 +1,12 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+- script: |
+    echo Provisioning cluster
+    az aks create --resource-group  k8s-resource-group --name eadAKSCluster --node-count 1 --location westeurope --service-principal 9baf5ccd-bb5c-4bf3-bce0-9c23748d2e2d --client-secret 9baf5ccd-bb5c-4bf3-bce0-9c23748d2e2d --generate-ssh-keys
+  displayName: 'Provision aks cluster'
