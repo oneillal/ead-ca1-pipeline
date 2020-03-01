@@ -46,6 +46,20 @@ stages:
         targetPath: '$(Pipeline.Workspace)'
         artifact: 'azure-vote-all-in-one-redis.yaml'
         publishLocation: 'pipeline'
+  - job: IAC
+    displayName: Publish terrform artefacts
+    pool:
+      name: Hosted VS2017
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy Terraform files to artifacts'
+      inputs:
+        SourceFolder: Terraform
+        TargetFolder: '$(build.artifactstagingdirectory)/Terraform'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact'
+      inputs:
+        PathtoPublish: '$(build.artifactstagingdirectory)'
 - stage: Provision_Infra
   displayName: Provision infrastructure
   jobs:
