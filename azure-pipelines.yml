@@ -150,12 +150,14 @@ stages:
       demands:
       - azureps
     steps:
-    - task: Kubernetes@0
+    - task: Kubernetes@1
       displayName: 'kubectl apply'
       inputs:
-        kubernetesServiceConnection: aksconn
-        namespace: default
-        command: apply
+        connectionType: 'Azure Resource Manager'
+        azureSubscriptionEndpoint: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
+        azureResourceGroup: 'k8s-rg'
+        kubernetesCluster: 'k8stest'
+        namespace: 'default'
+        command: 'apply'
         useConfigurationFile: true
         configuration: '$(System.DefaultWorkingDirectory)/azure-vote-all-in-one-redis.yaml'
-
