@@ -110,7 +110,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(Pipeline.Workspace)/drop/Terraform'
+        workingDirectory: '$(System.WorkFolder)/drop/Terraform'
         backendServiceArm: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
         backendAzureRmResourceGroupName: '$(terraformstoragerg)'
         backendAzureRmStorageAccountName: '$(terraformstorageaccount)'
@@ -121,7 +121,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'plan'
-        workingDirectory: '$(Pipeline.Workspace)/drop/Terraform'
+        workingDirectory: '$(System.WorkFolder)/drop/Terraform'
         commandOptions: '-lock-timeout=180s'
         environmentServiceNameAzureRM: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
     - task: TerraformTaskV1@0
@@ -129,6 +129,6 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        workingDirectory: '$(Pipeline.Workspace)/drop/Terraform'
+        workingDirectory: '$(System.WorkFolder)/drop/Terraform'
         commandOptions: '-auto-approve'
         environmentServiceNameAzureRM: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
