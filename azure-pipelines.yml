@@ -70,6 +70,14 @@ stages:
       demands:
       - azureps
     steps:
+    - task: AzurePowerShell@3
+      inputs:
+        ScriptType: InlineScript
+        Inline: |
+          dir $(System.WorkFolder)
+          dir $(Pipeline.Workspace)
+          dir $(System.DefaultWorkingDirectory)
+          dir $(Agent.BuildDirectory)
     - task: AzureCLI@1
       displayName: 'Azure CLI to deploy required Azure resources'
       inputs:
