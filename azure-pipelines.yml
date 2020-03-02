@@ -140,3 +140,22 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
         commandOptions: '-auto-approve'
         environmentServiceNameAzureRM: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
+- stage: Deploy
+  displayName: Deploy app
+  jobs:
+  - job: deploy
+    displayName: Deploy app
+    pool:
+      name: Hosted VS2017
+      demands:
+      - azureps
+    steps:
+    - task: Kubernetes@0
+      displayName: 'kubectl apply'
+      inputs:
+        kubernetesServiceConnection: aksconn
+        namespace: default
+        command: apply
+        useConfigurationFile: true
+        configuration: '$(System.DefaultWorkingDirectory)/azure-vote-all-in-one-redis.yaml'
+
