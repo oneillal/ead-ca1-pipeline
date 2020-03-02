@@ -70,10 +70,10 @@ stages:
       demands:
       - azureps
     steps:
-    - task: AzurePowerShell@3
+    - task: PowerShell@2
       inputs:
-        ScriptType: InlineScript
-        Inline: |
+        targetType: 'inline'
+        script: |
           dir $(System.WorkFolder)
           dir $(Pipeline.Workspace)
           dir $(System.DefaultWorkingDirectory)
