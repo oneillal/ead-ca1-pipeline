@@ -125,10 +125,12 @@ stages:
         backendAzureRmContainerName: 'terraform'
         backendAzureRmKey: 'terraform.tfstate'
     - task: AzurePowerShell@5
+      displayName: 'Import existing resource group to terraform'
       inputs:
         azureSubscription: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
         ScriptType: 'InlineScript'
         Inline: 'terraform import azurerm_resource_group.k8s-resource-group /subscriptions/37dc6063-359f-4693-b941-add4a5685359/resourceGroups/k8s-resource-group'
+        azurePowerShellVersion: LatestVersion        
     - task: TerraformTaskV1@0
       displayName: 'Terraform : plan'
       inputs:
