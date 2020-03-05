@@ -3,10 +3,10 @@ provider "azurerm" {
   # whilst the `version` attribute is optional, we recommend pinning to a given version of the Provider
   version = "=2.0.0"
   
-  subscription_id = "__subscriptionid__"
-  client_id       = "__clientid__"
-  client_secret   = "__clientsecret__"
-  tenant_id       = "__tenantid__"
+# subscription_id = "37dc6063-359f-4693-b941-add4a5685359"
+# client_id       = "e2f6b725-e3c1-417b-a3a7-66fd03a8bb36"
+# client_secret   = "57478ac9-4bc6-4dc4-bf8c-8028a860607f"
+# tenant_id       = "766317cb-e948-4e5f-8cec-dabc8e2fd5da"
 
   features {}
 }
@@ -14,9 +14,9 @@ provider "azurerm" {
 terraform {
   required_version = ">= 0.11" 
   backend "azurerm" {
-    storage_account_name = "__terraformstorageaccount__"
+    storage_account_name = "terraformstorage78219e1c"
     container_name       = "terraform"
     key                  = "terraform.tfstate"
-	access_key  ="__storagekey__"
+	  access_key  ="qSvcDMqcTcqgq1Mk0ECOEjruUQfa/Zon0SS5pDwUp9pdTq/BgecAWUgIn25f06lnX3Szj98Z/6k4qT8I06vZoQ=="
   }
 }

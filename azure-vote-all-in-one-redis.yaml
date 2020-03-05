@@ -59,7 +59,7 @@ spec:
         env:
         - name: REDIS
           value: "azure-vote-back"
-        imagePullSecrets:
+      imagePullSecrets:
         - name: acr-secret
 ---
 apiVersion: v1

@@ -1,8 +1,8 @@
 variable "client_id" {
-    default = "__clientid__"
+    default = "e2f6b725-e3c1-417b-a3a7-66fd03a8bb36"
 }
 variable "client_secret" {
-    default = "__clientsecret__"
+    default = "57478ac9-4bc6-4dc4-bf8c-8028a860607f"
 }
 
 variable "agent_count" {
@@ -22,7 +22,7 @@ variable cluster_name {
 }
 
 variable resource_group_name {
-    default = "k8s-resource-group"
+    default = "k8s-rg"
 }
 
 variable location {
