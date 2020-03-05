@@ -2,6 +2,12 @@
 provider "azurerm" {
   # whilst the `version` attribute is optional, we recommend pinning to a given version of the Provider
   version = "=2.0.0"
+  
+  subscription_id = "__subscriptionid__"
+  client_id       = "__clientid__"
+  client_secret   = "__clientsecret__"
+  tenant_id       = "__tenantid__"
+
   features {}
 }
 
