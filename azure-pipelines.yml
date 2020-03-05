@@ -11,9 +11,9 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'a84bfb04-c385-4f18-bc96-015265fc800e'
-  imageRepository: 'azurevote'
+  imageRepository: 'eadca1fe'
   containerRegistry: 'oneillalacr.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/ead-ca1-fe/Dockerfile'
   tag: '$(Build.BuildId)'
   # Storage
   terraformstoragerg: 'terraformrg'
@@ -40,11 +40,11 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - script: sed -i 's/azurevote:latest/azurevote:$(tag)/g' azure-vote-all-in-one-redis.yaml
+    - script: sed -i 's/eadca1fe:latest/eadca1fe:$(tag)/g' create-nodejs-service-manifest.yaml
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)'
-        artifact: 'azure-vote-all-in-one-redis.yaml'
+        artifact: 'create-nodejs-service-manifest.yaml'
         publishLocation: 'pipeline'
   - job: IAC
     displayName: Publish terrform artefacts
@@ -167,4 +167,4 @@ stages:
         namespace: 'default'
         command: 'apply'
         useConfigurationFile: true
-        configuration: '$(System.DefaultWorkingDirectory)/azure-vote-all-in-one-redis.yaml'
+        configuration: '$(System.DefaultWorkingDirectory)/create-nodejs-service-manifest.yaml'
