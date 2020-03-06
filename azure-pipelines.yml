@@ -44,8 +44,13 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)'
-        artifact: 'create-nodejs-service-manifest.yaml'
+        artifact: 'create-thin-service-manifest.yaml'
         publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'create-nodejs-service-manifest.yaml'
+        publishLocation: 'pipeline'        
   - job: IAC
     displayName: Publish terrform artefacts
     pool:
@@ -70,14 +75,14 @@ stages:
       demands:
       - azureps
     steps:
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: |
-          dir $(System.WorkFolder)
-          dir $(Pipeline.Workspace)
-          dir $(System.DefaultWorkingDirectory)
-          dir $(Agent.BuildDirectory)
+#    - task: PowerShell@2
+#      inputs:
+#        targetType: 'inline'
+#        script: |
+#          dir $(System.WorkFolder)
+#          dir $(Pipeline.Workspace)
+#          dir $(System.DefaultWorkingDirectory)
+#          dir $(Agent.BuildDirectory)
     - task: AzureCLI@1
       displayName: 'Azure CLI to deploy required Azure resources'
       inputs:
@@ -110,9 +115,9 @@ stages:
         tokenPrefix: '__'
         tokenSuffix: '__'
     - task: TerraformInstaller@0
-      displayName: 'Install Terraform 0.12.3'
+      displayName: 'Install Terraform 0.12.21'
       inputs:
-        terraformVersion: '0.12.3'
+        terraformVersion: '0.12.21'
     - task: TerraformTaskV1@0
       displayName: 'Terraform : init'
       inputs:
@@ -124,14 +129,14 @@ stages:
         backendAzureRmStorageAccountName: '$(terraformstorageaccount)'
         backendAzureRmContainerName: 'terraform'
         backendAzureRmKey: 'terraform.tfstate'
-    - task: AzurePowerShell@5
-      displayName: 'Terraform : import'
-      inputs:
-        azureSubscription: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
-        ScriptType: 'InlineScript'
-        Inline: terraform import azurerm_resource_group.k8s-rg /subscriptions/37dc6063-359f-4693-b941-add4a5685359/resourceGroups/k8s-rg
-        azurePowerShellVersion: LatestVersion
+#    - task: AzurePowerShell@5
+#      displayName: 'Terraform : import'
+#      inputs:
+#        azureSubscription: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
+#        workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
+#        ScriptType: 'InlineScript'
+#        Inline: terraform import azurerm_resource_group.k8s-rg /subscriptions/37dc6063-359f-4693-b941-add4a5685359/resourceGroups/k8s-rg
+#        azurePowerShellVersion: LatestVersion
     - task: TerraformTaskV1@0
       displayName: 'Terraform : plan'
       inputs:
@@ -159,7 +164,18 @@ stages:
       - azureps
     steps:
     - task: Kubernetes@1
-      displayName: 'kubectl apply'
+      displayName: 'Deploy Latest BE'
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscriptionEndpoint: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
+        azureResourceGroup: 'k8s-rg'
+        kubernetesCluster: 'k8stest'
+        namespace: 'default'
+        command: 'apply'
+        useConfigurationFile: true
+        configuration: '$(System.DefaultWorkingDirectory)/create-thin-service-manifest.yaml'
+    - task: Kubernetes@1
+      displayName: 'Deploy Latest FE'
       inputs:
         connectionType: 'Azure Resource Manager'
         azureSubscriptionEndpoint: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
