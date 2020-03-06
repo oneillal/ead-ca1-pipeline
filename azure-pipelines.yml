@@ -130,12 +130,7 @@ stages:
         azureSubscription: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
         workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
         ScriptType: 'InlineScript'
-        Inline: |
-          export ARM_CLIENT_ID="$(clientid)"
-          export ARM_CLIENT_SECRET="$(clientsecret)"
-          export ARM_SUBSCRIPTION_ID="$(subscriptionid)"
-          export ARM_TENANT_ID="$(tenantid)"
-          terraform import azurerm_resource_group.k8s-rg /subscriptions/37dc6063-359f-4693-b941-add4a5685359/resourceGroups/k8s-rg
+        Inline: terraform import azurerm_resource_group.k8s-rg /subscriptions/37dc6063-359f-4693-b941-add4a5685359/resourceGroups/k8s-rg
         azurePowerShellVersion: LatestVersion
     - task: TerraformTaskV1@0
       displayName: 'Terraform : plan'
