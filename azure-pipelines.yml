@@ -127,6 +127,7 @@ stages:
     - task: AzurePowerShell@5
       displayName: 'Terraform : import'
       inputs:
+        azureSubscription: 'Azure for Students (37dc6063-359f-4693-b941-add4a5685359)'
         workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
         ScriptType: 'InlineScript'
         Inline: 'terraform import azurerm_resource_group.k8s-rg /subscriptions/37dc6063-359f-4693-b941-add4a5685359/resourceGroups/k8s-rg'
