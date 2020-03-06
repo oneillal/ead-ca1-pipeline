@@ -14,9 +14,9 @@ provider "azurerm" {
 terraform {
   required_version = ">= 0.11" 
   backend "azurerm" {
-    storage_account_name = "terraformstorage78219e1c"
+    storage_account_name = "__terraformstorageaccount__"
     container_name       = "terraform"
     key                  = "terraform.tfstate"
-	  access_key  ="A41VRY6S1u4wGAfLljm8UfXM6v101obdRTOdp+VlJxms2NpKwI0oFGtS/XWWOJXHOmtAbglvE0nxpgsU48alxg=="
+	  access_key  ="__storagekey__"
   }
 }

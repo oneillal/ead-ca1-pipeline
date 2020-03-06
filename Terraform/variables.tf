@@ -1,8 +1,8 @@
 variable "client_id" {
-    default = "e2f6b725-e3c1-417b-a3a7-66fd03a8bb36"
+    default = "__clientid__"
 }
 variable "client_secret" {
-    default = "57478ac9-4bc6-4dc4-bf8c-8028a860607f"
+    default = "__clientsecret__"
 }
 
 variable "agent_count" {
