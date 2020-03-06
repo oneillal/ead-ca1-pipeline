@@ -44,8 +44,13 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)'
-        artifact: 'create-nodejs-service-manifest.yaml'
+        artifact: 'create-thin-service-manifest.yaml'
         publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'create-nodejs-service-manifest.yaml'
+        publishLocation: 'pipeline'        
   - job: IAC
     displayName: Publish terrform artefacts
     pool:
