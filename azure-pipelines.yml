@@ -129,7 +129,7 @@ stages:
 #      inputs:
 #        workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
 #        ScriptType: 'InlineScript'
-#        Inline: 'terraform import azurerm_resource_group.k8s-resource-group /subscriptions/37dc6063-359f-4693-b941-add4a5685359/resourceGroups/k8s-resource-group'
+#        Inline: 'terraform import azurerm_resource_group.k8s-rg /subscriptions/37dc6063-359f-4693-b941-add4a5685359/resourceGroups/k8s-rg'
 #        azurePowerShellVersion: LatestVersion
     - task: TerraformTaskV1@0
       displayName: 'Terraform : plan'
