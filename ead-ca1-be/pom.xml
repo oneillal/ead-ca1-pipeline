@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.mongodb>3.10.1</version.mongodb>
         <version.json.api>1.0</version.json.api>
-        <version.spring.core>5.1.5.RELEASE</version.spring.core>
+        <version.spring.core>5.3.18</version.spring.core>
         <version.wildfly.swarm>2018.3.3</version.wildfly.swarm>
     </properties>
     
